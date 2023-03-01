@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+box "PX4 & dop_qd_sim" #LightGreen
+entity quadrotor
+end box
+
+box "TX2 NX -> oop_qd_onbd" #LightBLUE
+participant controller
+end box
+'note right of pt_publisher #aqua
+'需要从ROS里拿一个parameter
+'确定是选SE3还是NMPC
+'end note
+
+box "PC -> cmd_pc" #White
+participant traj_generator
+participant path_planner
+entity rviz
+end box
+
+note left of traj_generator #aqua
+启动就不关了
+end note
+
+note left of path_planner
+考虑用FMS库重写
+考虑和traj_generator是1个node还是2个node
+end note
+
+path_planner -> path_planner: 读取路径点，\n 或读取rviz指令，\n 或path planning
+path_planner -> rviz: 绘制Path
+path_planner -> traj_generator: self_defined.srv.FollowPath
+
+
+traj_generator -> traj_generator: 规划轨迹
+traj_generator -> rviz: 绘制traj, 也是Path
+traj_generator -> controller: self_defined.srv.FollowTraj, \n得到轨迹参数，重置轨迹开始时间
+
+controller -> controller: NMPC控制律
+controller -> quadrotor: pub控制目标
+controller -> rviz: 绘制Point，表示当前的期望位置
+
+
+controller -> traj_generator: self_defined.srv.FollowTraj, \n告知Traj是否飞行成功
+traj_generator -> path_planner: self_defined.srv.FollowPath, \n告知Path是否飞行成功
+
+'controller -> traj_generator: self_defined.srv.GetTraj, \n告知当前点已飞行完毕，当前点位置
+'note left
+'状态: IDLE
+'end note
+'
+'traj_generator -> path_planner: nav.msgs.srv.GetPlan, \n告知当前点已飞行完毕，当前点位置
+'
+'path_planner -> path_planner: path planning
+'path_planner -> rviz: 绘制Path
+'path_planner -> traj_generator: nav.msgs.srv.GetPlan, 回复Path, 得到全部路径点
+'
+'traj_generator -> traj_generator: 规划轨迹
+'traj_generator -> rviz: 绘制轨迹
+'traj_generator -> controller: self_defined.srv.GetTraj, 得到轨迹参数，重置轨迹开始时间
+'note left
+'状态: PUB
+'end note
+'
+'controller -> rviz: 绘制Point，表示当前的期望位置
+
+
+@enduml
