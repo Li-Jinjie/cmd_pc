@@ -26,8 +26,9 @@ note left of traj_generator #aqua
 end note
 
 note left of path_planner
-考虑用FMS库重写
-考虑和traj_generator是1个node还是2个node
+考虑用FMS库重写;
+考虑和traj_generator是1个node还是2个node;
+参考ROS2的写法，使用class的形式写整个程序
 end note
 
 path_planner -> path_planner: 读取路径点，\n 或读取rviz指令，\n 或path planning
