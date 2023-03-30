@@ -27,7 +27,7 @@ end note
 
 note left of path_planner
 考虑用FMS库重写;
-考虑和traj_generator是1个node还是2个node;
+考虑和path_planner是1个node还是2个node;
 参考ROS2的写法，使用class的形式写整个程序
 end note
 
