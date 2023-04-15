@@ -15,10 +15,13 @@ sys.path.insert(0, current_path)
 
 import rospy
 from transitions import Machine
-import random
 import actionlib
-
+from geometry_msgs.msg import PoseStamped
+from nav_msgs.msg import Path
 from oop_qd_onbd.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
+
+from traj_gen import TrajGenerator, MsgWaypoints
+from waypoints import eight_wpt_1, lab_area_wpts
 
 
 class PlannerNode(object):
@@ -29,6 +32,9 @@ class PlannerNode(object):
 
     def __init__(self):
         rospy.init_node("planner_node", anonymous=False)
+
+        # Trajectory generator
+        self.traj_generator = TrajGenerator()
 
         # Action Client
         self.tracking_client = actionlib.SimpleActionClient("tracking_controller/track_traj", TrackTrajAction)
@@ -44,6 +50,10 @@ class PlannerNode(object):
         # self.machine.add_transition(trigger="land", source="*", dest="LAND", after="set_landing")
         # self.machine.add_transition(trigger="touch_ground", source="LAND", dest="GROUND")
 
+        # viz
+        self.lab_area_pub = rospy.Publisher("path_planner/lab_area/", Path, queue_size=10)
+        self.path_pub = rospy.Publisher("path_planner/path/", Path, queue_size=10)
+
         # start
         self.goal = TrackTrajGoal()
         self.planning_traj()
@@ -51,11 +61,26 @@ class PlannerNode(object):
     def planning_traj(self):
         rospy.loginfo("Start planning trajectory......")
 
-        # TODO: planning trajectory
-        time.sleep(1)
-        self.goal = TrackTrajGoal()
+        # -------- path planner ----------
+        waypoints = eight_wpt_1
+        self.viz_path(waypoints, self.path_pub)
+        rospy.loginfo("Get path points!")
 
-        rospy.loginfo("Finish planning trajectory.")
+        self.viz_path(lab_area_wpts, self.lab_area_pub)
+        rospy.loginfo("Pub lab area!")
+
+        # -------- trajectory generator ----------
+        rospy.loginfo("Generating trajectory......")
+        traj_coeff, all_pose_list = self.traj_generator.generate_traj(waypoints)
+
+        self.goal = TrackTrajGoal()
+        self.goal.traj_coeff = traj_coeff
+
+        wpts_traj = MsgWaypoints()
+        for i in range(len(all_pose_list)):
+            wpts_traj.add(xyz=all_pose_list[:, i : i + 1])
+
+        rospy.loginfo("Finish planning trajectory!")
         self.finish_planning()  # trigger the FMS to change state
 
     def set_traj(self):
@@ -69,8 +94,23 @@ class PlannerNode(object):
         rospy.loginfo(f"Trajectory tracking RMSE: {result.tracking_error_rmse} m")
         self.reach_target()  # trigger the FMS to change state
 
-    def track_traj_feedback_cb(self, feedback: TrackTrajFeedback):
+    def track_traj_feedback_cb(self, feedback: TrackTrajFeedback) -> None:
         rospy.loginfo(f"Trajectory tracking percent complete: {feedback.percent_complete}")
+
+    @staticmethod
+    def viz_path(waypoints: MsgWaypoints, pub: rospy.Publisher):
+        wpts_path = Path()
+        for i in range(waypoints.num_waypoints):
+            pt = PoseStamped()
+            pt.pose.position.x = waypoints.xyz_list[0, i]
+            pt.pose.position.y = waypoints.xyz_list[1, i]
+            pt.pose.position.z = waypoints.xyz_list[2, i]
+            wpts_path.poses.append(pt)
+
+        wpts_path.header.stamp = rospy.Time.now()
+        wpts_path.header.frame_id = "map"
+
+        pub.publish(wpts_path)
 
     # def set_takeoff_traj(self):
     #     pass

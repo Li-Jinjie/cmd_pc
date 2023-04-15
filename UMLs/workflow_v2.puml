@@ -38,7 +38,7 @@ planner -> rviz: 绘制Path
 
 planner -> planner: 规划轨迹
 planner -> rviz: 绘制traj, 也是Path
-planner -> controller: self_defined.srv.FollowTraj, \n得到轨迹参数，重置轨迹开始时间
+planner -> controller: self_defined.srv.SetTraj, \n得到轨迹参数，重置轨迹开始时间
 
 note left of planner
 状态: EXECUTION
@@ -49,7 +49,7 @@ controller -> quadrotor: pub控制目标
 controller -> rviz: 绘制Point，表示当前的期望位置
 
 
-controller -> planner: self_defined.srv.FollowTraj, \n告知Traj是否飞行成功
+controller -> planner: self_defined.srv.SetTraj, \n告知Traj是否飞行成功
 'planner -> planner: self_defined.srv.FollowPath, \n告知Path是否飞行成功
 
 note left of planner
