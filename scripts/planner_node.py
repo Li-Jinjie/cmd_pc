@@ -53,6 +53,7 @@ class PlannerNode(object):
         # viz
         self.lab_area_pub = rospy.Publisher("path_planner/lab_area/", Path, queue_size=10)
         self.path_pub = rospy.Publisher("path_planner/path/", Path, queue_size=10)
+        self.traj_pub = rospy.Publisher("path_planner/traj/", Path, queue_size=10)
 
         # start
         self.goal = TrackTrajGoal()
@@ -77,8 +78,10 @@ class PlannerNode(object):
         self.goal.traj_coeff = traj_coeff
 
         wpts_traj = MsgWaypoints()
-        for i in range(len(all_pose_list)):
-            wpts_traj.add(xyz=all_pose_list[:, i : i + 1])
+        for i in range(len(all_pose_list[0])):
+            if i % 10 == 0:
+                wpts_traj.add(xyz=all_pose_list[:, i : i + 1])
+        self.viz_path(wpts_traj, self.traj_pub)
 
         rospy.loginfo("Finish planning trajectory!")
         self.finish_planning()  # trigger the FMS to change state
