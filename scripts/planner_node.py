@@ -79,8 +79,7 @@ class PlannerNode(object):
 
         wpts_traj = MsgWaypoints()
         for i in range(len(all_pose_list[0])):
-            if i % 10 == 0:
-                wpts_traj.add(xyz=all_pose_list[:, i : i + 1])
+            wpts_traj.add(xyz=all_pose_list[:, i : i + 1])
         self.viz_path(wpts_traj, self.traj_pub)
 
         rospy.loginfo("Finish planning trajectory!")

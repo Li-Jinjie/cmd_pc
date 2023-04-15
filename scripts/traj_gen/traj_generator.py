@@ -148,7 +148,7 @@ class TrajGenerator:
     def _check_continuity(self) -> list:
         rospy.loginfo("Checking the trajectory......")
         t_sim = 0
-        dt = 0.01  # 100hz
+        dt = 0.1
         all_pos = []
         all_vel = []
         all_acc = []

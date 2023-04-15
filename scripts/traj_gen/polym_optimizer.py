@@ -7,6 +7,8 @@
 @Email   : lijinjie362@outlook.com
 @Description:  None
 """
+import time
+
 import numpy as np
 from enum import Enum, unique
 
@@ -99,7 +101,8 @@ class PolymOptimizer:
                 b_vec[row, 0] = 0
                 row += 1
 
-        return np.linalg.inv(a_mat) @ b_vec
+        # return np.linalg.inv(a_mat) @ b_vec  # very slow, 8.6 ms
+        return np.linalg.solve(a_mat, b_vec)  # faster, 0.1 ms. See numerical analysis.
 
     def get_poly_params(self, deriv_num: int, t: float) -> np.array:
         """obtain params of polynomial
