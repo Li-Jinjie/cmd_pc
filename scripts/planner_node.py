@@ -37,9 +37,11 @@ class PlannerNode(object):
         self.traj_generator = TrajGenerator()
 
         # Action Client
-        self.tracking_client = actionlib.SimpleActionClient("tracking_controller/track_traj", TrackTrajAction)
+        self.tracking_client = actionlib.SimpleActionClient(
+            "/qd_0/tracking_controller/pt_pub_action_server", TrackTrajAction  # TODO: change name
+        )
         self.tracking_client.wait_for_server()
-        rospy.loginfo("Action Service exist: tracking_controller/track_traj")
+        rospy.loginfo("Action Service exist: /qd_0/tracking_controller/pt_pub_action_server")
 
         # Finite State machine
         self.machine = Machine(model=self, states=PlannerNode.states, initial="PLANNING")
@@ -93,11 +95,12 @@ class PlannerNode(object):
         result: TrackTrajResult = self.tracking_client.get_result()
 
         rospy.loginfo("Reach target.")
-        rospy.loginfo(f"Trajectory tracking RMSE: {result.tracking_error_rmse} m")
+        rospy.loginfo(f"Trajectory tracking RMSE: {result.pos_error_rmse} m")
+        rospy.loginfo(f"Yaw angle tracking RMSE: {result.yaw_error_rmse} m")
         self.reach_target()  # trigger the FMS to change state
 
     def track_traj_feedback_cb(self, feedback: TrackTrajFeedback) -> None:
-        rospy.loginfo(f"Trajectory tracking percent complete: {feedback.percent_complete}")
+        rospy.loginfo_throttle(1, f"Trajectory tracking percent complete: {100 * feedback.percent_complete:.2f}%")
 
     @staticmethod
     def viz_path(waypoints: MsgWaypoints, pub: rospy.Publisher):
