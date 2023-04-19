@@ -33,6 +33,26 @@ _dict_eight_wpt_2 = [
     dict(x=1.0, y=1.0 - 1.5, z=1.5, yaw=np.radians(0)),
 ]
 
+_dict_eight_wpt_3 = [
+    dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
+    dict(x=6.0, y=6.0, z=6.5, yaw=np.radians(0.1), speed=5),
+    dict(x=11.0, y=1.0, z=8, yaw=np.radians(0), speed=5),
+    dict(x=6.0, y=-4.0, z=6.5, yaw=np.radians(-0.1), speed=5),
+    dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
+    dict(x=-4.0, y=6.0, z=3.5, yaw=np.radians(0), speed=5),
+    dict(x=-9.0, y=1.0, z=2, yaw=np.radians(0), speed=5),
+    dict(x=-4.0, y=-4.0, z=3.5, yaw=np.radians(0), speed=5),
+    dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
+    dict(x=6.0, y=6.0, z=6.5, yaw=np.radians(0.1), speed=5),
+    dict(x=11.0, y=1.0, z=8, yaw=np.radians(0), speed=5),
+    dict(x=6.0, y=-4.0, z=6.5, yaw=np.radians(-0.1), speed=5),
+    dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
+    dict(x=-4.0, y=6.0, z=3.5, yaw=np.radians(0), speed=5),
+    dict(x=-9.0, y=1.0, z=2, yaw=np.radians(0), speed=5),
+    dict(x=-4.0, y=-4.0, z=3.5, yaw=np.radians(0), speed=5),
+    dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
+]
+
 _dict_lab_area_wpts = [
     dict(x=6.0, y=3.0, z=0.5),
     dict(x=6.0, y=-2.5, z=0.5),
@@ -61,4 +81,5 @@ def dict_2_waypoints(dict_list: list):
 
 eight_wpt_1 = dict_2_waypoints(_dict_eight_wpt_1)
 eight_wpt_2 = dict_2_waypoints(_dict_eight_wpt_2)
+eight_wpt_3 = dict_2_waypoints(_dict_eight_wpt_3)
 lab_area_wpts = dict_2_waypoints(_dict_lab_area_wpts)

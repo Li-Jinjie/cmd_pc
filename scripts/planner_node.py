@@ -21,7 +21,7 @@ from nav_msgs.msg import Path
 from oop_qd_onbd.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
 
 from traj_gen import TrajGenerator, MsgWaypoints
-from waypoints import eight_wpt_1, lab_area_wpts
+from waypoints import eight_wpt_1, lab_area_wpts, eight_wpt_3
 
 
 class PlannerNode(object):
@@ -38,10 +38,10 @@ class PlannerNode(object):
 
         # Action Client
         self.tracking_client = actionlib.SimpleActionClient(
-            "/qd_0/tracking_controller/pt_pub_action_server", TrackTrajAction  # TODO: change name
+            "/fhnp/traj_tracker/pt_pub_action_server", TrackTrajAction  # TODO: extend to multiple qd
         )
         self.tracking_client.wait_for_server()
-        rospy.loginfo("Action Service exist: /qd_0/tracking_controller/pt_pub_action_server")
+        rospy.loginfo("Action Service exist: /qd_0/traj_tracker/pt_pub_action_server")
 
         # Finite State machine
         self.machine = Machine(model=self, states=PlannerNode.states, initial="PLANNING")
@@ -65,7 +65,7 @@ class PlannerNode(object):
         rospy.loginfo("Start planning trajectory......")
 
         # -------- path planner ----------
-        waypoints = eight_wpt_1
+        waypoints = eight_wpt_3
         self.viz_path(waypoints, self.path_pub)
         rospy.loginfo("Get path points!")
 
