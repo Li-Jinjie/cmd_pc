@@ -38,10 +38,10 @@ class PlannerNode(object):
 
         # Action Client
         self.tracking_client = actionlib.SimpleActionClient(
-            "/qd_0/tracking_controller/pt_pub_action_server", TrackTrajAction  # TODO: change name
+            "/fhnp/traj_tracker/pt_pub_action_server", TrackTrajAction  # TODO: change name
         )
         self.tracking_client.wait_for_server()
-        rospy.loginfo("Action Service exist: /qd_0/tracking_controller/pt_pub_action_server")
+        rospy.loginfo("Action Service exist: /fhnp/traj_tracker/pt_pub_action_server")
 
         # Finite State machine
         self.machine = Machine(model=self, states=PlannerNode.states, initial="PLANNING")
