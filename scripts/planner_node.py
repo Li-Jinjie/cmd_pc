@@ -21,7 +21,7 @@ from nav_msgs.msg import Path
 from oop_qd_onbd.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
 
 from traj_gen import TrajGenerator, MsgWaypoints
-from waypoints import eight_wpt_1, lab_area_wpts
+from waypoints import eight_wpt_1, lab_area_wpts, eight_wpt_3
 
 
 class PlannerNode(object):
