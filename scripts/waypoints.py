@@ -11,6 +11,18 @@ from traj_gen import MsgWaypoints
 
 _dict_eight_wpt_1 = [
     dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
+    dict(x=3.0, y=2.0, z=0.5, yaw=np.radians(0)),
+    dict(x=5.0, y=1.0, z=0.5, yaw=np.radians(0)),
+    dict(x=3.0, y=0.0, z=0.5, yaw=np.radians(0)),
+    dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
+    dict(x=-1.0, y=2.0, z=0.5, yaw=np.radians(0)),
+    dict(x=-3.0, y=1.0, z=0.5, yaw=np.radians(0)),
+    dict(x=-1.0, y=0.0, z=0.5, yaw=np.radians(0)),
+    dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
+]
+
+_dict_eight_wpt_1_diff_h = [
+    dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
     dict(x=3.0, y=2.0, z=1.0, yaw=np.radians(0)),
     dict(x=5.0, y=1.0, z=1.0, yaw=np.radians(0)),
     dict(x=3.0, y=0.0, z=1.0, yaw=np.radians(0)),
@@ -80,6 +92,7 @@ def dict_2_waypoints(dict_list: list):
 
 
 eight_wpt_1 = dict_2_waypoints(_dict_eight_wpt_1)
+eight_wpt_1_diff_h = dict_2_waypoints(_dict_eight_wpt_1_diff_h)
 eight_wpt_2 = dict_2_waypoints(_dict_eight_wpt_2)
 eight_wpt_3 = dict_2_waypoints(_dict_eight_wpt_3)
 lab_area_wpts = dict_2_waypoints(_dict_lab_area_wpts)

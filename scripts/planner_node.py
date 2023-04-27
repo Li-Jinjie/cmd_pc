@@ -21,7 +21,7 @@ from nav_msgs.msg import Path
 from oop_qd_onbd.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
 
 from traj_gen import TrajGenerator, MsgWaypoints
-from waypoints import eight_wpt_1, lab_area_wpts, eight_wpt_3
+from waypoints import eight_wpt_1, lab_area_wpts, eight_wpt_3, eight_wpt_1_diff_h
 
 
 class PlannerNode(object):
@@ -53,9 +53,9 @@ class PlannerNode(object):
         # self.machine.add_transition(trigger="touch_ground", source="LAND", dest="GROUND")
 
         # viz
-        self.lab_area_pub = rospy.Publisher("path_planner/lab_area/", Path, queue_size=10)
-        self.path_pub = rospy.Publisher("path_planner/path/", Path, queue_size=10)
-        self.traj_pub = rospy.Publisher("path_planner/traj/", Path, queue_size=10)
+        self.lab_area_pub = rospy.Publisher("path_planner/viz_lab_area/", Path, queue_size=10)
+        self.path_pub = rospy.Publisher("path_planner/viz_path/", Path, queue_size=10)
+        self.traj_pub = rospy.Publisher("path_planner/viz_traj/", Path, queue_size=10)
 
         # start
         self.goal = TrackTrajGoal()
@@ -65,7 +65,7 @@ class PlannerNode(object):
         rospy.loginfo("Start planning trajectory......")
 
         # -------- path planner ----------
-        waypoints = eight_wpt_1
+        waypoints = eight_wpt_1_diff_h  # change here!
         self.viz_path(waypoints, self.path_pub)
         rospy.loginfo("Get path points!")
 
@@ -95,8 +95,8 @@ class PlannerNode(object):
         result: TrackTrajResult = self.tracking_client.get_result()
 
         rospy.loginfo("Reach target.")
-        rospy.loginfo(f"Trajectory tracking RMSE: {result.pos_error_rmse} m")
-        rospy.loginfo(f"Yaw angle tracking RMSE: {result.yaw_error_rmse} m")
+        rospy.loginfo(f"Trajectory tracking RMSE: {result.pos_error_rmse} [m]")
+        rospy.loginfo(f"Yaw angle tracking RMSE: {result.yaw_error_rmse} [deg]")
         self.reach_target()  # trigger the FMS to change state
 
     def track_traj_feedback_cb(self, feedback: TrackTrajFeedback) -> None:
