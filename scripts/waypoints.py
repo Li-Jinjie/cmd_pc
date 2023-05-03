@@ -23,13 +23,13 @@ _dict_eight_wpt_1 = [
 
 _dict_eight_wpt_1_diff_h = [
     dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
-    dict(x=3.0, y=2.0, z=1.0, yaw=np.radians(0)),
-    dict(x=5.0, y=1.0, z=1.0, yaw=np.radians(0)),
-    dict(x=3.0, y=0.0, z=1.0, yaw=np.radians(0)),
+    dict(x=3.0, y=2.0, z=1.0, yaw=np.radians(10)),
+    dict(x=5.0, y=1.0, z=1.0, yaw=np.radians(20)),
+    dict(x=3.0, y=0.0, z=1.0, yaw=np.radians(10)),
     dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
-    dict(x=-1.0, y=2.0, z=0.0, yaw=np.radians(0)),
-    dict(x=-3.0, y=1.0, z=0.0, yaw=np.radians(0)),
-    dict(x=-1.0, y=0.0, z=0.0, yaw=np.radians(0)),
+    dict(x=-1.0, y=2.0, z=0.0, yaw=np.radians(-10)),
+    dict(x=-3.0, y=1.0, z=0.0, yaw=np.radians(-20)),
+    dict(x=-1.0, y=0.0, z=0.0, yaw=np.radians(-10)),
     dict(x=1.0, y=1.0, z=0.5, yaw=np.radians(0)),
 ]
 
@@ -47,17 +47,17 @@ _dict_eight_wpt_2 = [
 
 _dict_eight_wpt_3 = [
     dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
-    dict(x=6.0, y=6.0, z=6.5, yaw=np.radians(0.1), speed=5),
+    dict(x=6.0, y=6.0, z=6.5, yaw=np.radians(0), speed=5),
     dict(x=11.0, y=1.0, z=8, yaw=np.radians(0), speed=5),
-    dict(x=6.0, y=-4.0, z=6.5, yaw=np.radians(-0.1), speed=5),
+    dict(x=6.0, y=-4.0, z=6.5, yaw=np.radians(0), speed=5),
     dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
     dict(x=-4.0, y=6.0, z=3.5, yaw=np.radians(0), speed=5),
     dict(x=-9.0, y=1.0, z=2, yaw=np.radians(0), speed=5),
     dict(x=-4.0, y=-4.0, z=3.5, yaw=np.radians(0), speed=5),
     dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
-    dict(x=6.0, y=6.0, z=6.5, yaw=np.radians(0.1), speed=5),
+    dict(x=6.0, y=6.0, z=6.5, yaw=np.radians(0), speed=5),
     dict(x=11.0, y=1.0, z=8, yaw=np.radians(0), speed=5),
-    dict(x=6.0, y=-4.0, z=6.5, yaw=np.radians(-0.1), speed=5),
+    dict(x=6.0, y=-4.0, z=6.5, yaw=np.radians(0), speed=5),
     dict(x=1.0, y=1.0, z=5, yaw=np.radians(0), speed=5),
     dict(x=-4.0, y=6.0, z=3.5, yaw=np.radians(0), speed=5),
     dict(x=-9.0, y=1.0, z=2, yaw=np.radians(0), speed=5),
@@ -88,8 +88,8 @@ def dict_2_waypoints(dict_list: list):
             yaw=d["yaw"] if "yaw" in d else 0,
             speed=d["speed"] if "speed" in d else v_mean,
         )
-    wpts.speed_list[0] = 0.0
-    wpts.speed_list[-1] = 0.0
+    # wpts.speed_list[0] = 0.0
+    # wpts.speed_list[-1] = 0.0
     return wpts
 
 
