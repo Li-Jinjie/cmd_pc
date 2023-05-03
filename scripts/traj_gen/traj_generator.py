@@ -54,9 +54,10 @@ class TrajGenerator:
         """
         distance = waypoints.xyz_list[:, 1:] - waypoints.xyz_list[:, 0:-1]
 
+        v_mean = (waypoints.speed_list[:-1] + waypoints.speed_list[1:]) / 2
+
         traj_time_sep = (
-            np.sqrt(np.square(distance[0, :]) + np.square(distance[1, :]) + np.square(distance[2, :]))
-            / waypoints.speed_list[1:]
+            np.sqrt(np.square(distance[0, :]) + np.square(distance[1, :]) + np.square(distance[2, :])) / v_mean
         )
 
         traj_coeff.traj_time_seg = traj_time_sep

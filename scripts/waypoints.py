@@ -88,6 +88,8 @@ def dict_2_waypoints(dict_list: list):
             yaw=d["yaw"] if "yaw" in d else 0,
             speed=d["speed"] if "speed" in d else v_mean,
         )
+    wpts.speed_list[0] = 0.0
+    wpts.speed_list[-1] = 0.0
     return wpts
 
 
