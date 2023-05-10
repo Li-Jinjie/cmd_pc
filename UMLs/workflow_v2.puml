@@ -25,31 +25,34 @@ note left of planner #aqua
 end note
 
 note left of planner
-考虑用FMS库重写 -> transitions;
-参考ROS2的写法，使用class的形式写整个程序.
+考虑用FMS库transitions编写状态机;
+参考ROS2的写法，使用class的形式组织程序。
 end note
 
-planner -> planner: 读取路径点，\n 或读取rviz指令，\n 或path planning
 note left planner
 状态: PLANNING
 end note
+planner -> planner: 读取路径点，\n 或读取rviz指令，\n 或path planning
 planner -> rviz: 绘制Path
 'path_planner -> traj_generator: self_defined.srv.FollowPath
 
 planner -> planner: 规划轨迹
-planner -> rviz: 绘制traj, 也是Path
-planner -> controller: self_defined.srv.SetTraj, \n得到轨迹参数，重置轨迹开始时间
+planner -> rviz: 绘制traj, 也是Path消息类型
 
 note left of planner
 状态: EXECUTION
 end note
 
-controller -> controller: NMPC控制律
-controller -> quadrotor: pub控制目标
-controller -> rviz: 绘制Point，表示当前的期望位置
+planner -> controller: action.send_goal, \n设置轨迹参数，重置轨迹开始时间
 
 
-controller -> planner: self_defined.srv.SetTraj, \n告知Traj是否飞行成功
+controller -> controller: 生成控制目标 & 异步执行NMPC控制律
+controller -> quadrotor: pub角速度控制指令
+controller -> planner: action.publish_feedback, \n告知轨迹跟踪的进度与误差
+controller -> rviz: 绘制tf2/Odom，表示当前位置
+
+
+controller -> planner: action.set_succeeded, \n告知Traj飞行成功
 'planner -> planner: self_defined.srv.FollowPath, \n告知Path是否飞行成功
 
 note left of planner
