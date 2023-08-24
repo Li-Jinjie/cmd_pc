@@ -3,7 +3,7 @@
 
 autonumber
 
-box "PX4 & dop_qd_sim" #LightGreen
+box "PX4 & dop_sim" #LightGreen
 entity quadrotor
 end box
 
