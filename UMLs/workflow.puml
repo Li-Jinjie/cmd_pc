@@ -7,7 +7,7 @@ box "PX4 & dop_sim" #LightGreen
 entity quadrotor
 end box
 
-box "TX2 NX -> oop_qd_onbd" #LightBLUE
+box "TX2 NX -> ndp_nmpc_qd" #LightBLUE
 participant controller
 end box
 'note right of pt_publisher #aqua

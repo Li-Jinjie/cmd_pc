@@ -6,7 +6,7 @@ CMD PC is a repository for trajectory generation.
 
 ## Installation
 
-1. Follow the installation in https://github.com/Li-Jinjie/oop_qd_onbd
+1. Follow the installation in https://github.com/Li-Jinjie/ndp_nmpc_qd
 2. `git clone https://github.com/Li-Jinjie/cmd_pc.git`
 5. `catkin build` to build the whole workspace. Done!
 
@@ -14,7 +14,7 @@ CMD PC is a repository for trajectory generation.
 
 Before each running:  `cd /path_to_workspace` and then `source devel/setup.bash`
 
-- If you want to make one quadrotor fly, just run `roslaunch oop_qd_onbd one_qd_nmpc.launch`
+- If you want to make one quadrotor fly, just run `roslaunch ndp_nmpc_qd one_qd_nmpc.launch`
 - Then run `rosrun cmd_pc planner_node.py ` to send trajectories!
 
 ## License
