@@ -7,7 +7,7 @@ box "PX4 & dop_sim" #LightGreen
 entity quadrotor
 end box
 
-box "TX2 NX -> \n ndp_nmpc_qd/controller_node" #LightBLUE
+box "(TX2 NX)  ndp_nmpc_qd/controller_node" #LightBLUE
 participant tmr_control
 participant pt_pub_server
 end box
@@ -20,7 +20,7 @@ note over tmr_control, pt_pub_server #white
 3. 向底层控制器发命令
 end note
 
-/note over of planner #white
+/note over planner, rviz #white
 - 启动就不关了
 ---
 1. 读取路径点
