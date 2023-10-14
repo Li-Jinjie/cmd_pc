@@ -15,5 +15,4 @@ jobs:
       with:
         path: ./UMLs/
         message: "Render PlantUML files"
-      env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        personal_token: ${{ secrets.DEPLOY_TOKEN }}
