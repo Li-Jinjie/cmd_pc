@@ -64,7 +64,7 @@ planner -> pt_pub_server: action.send_goal, \n设置轨迹参数，重置轨迹�
 loop when tracking
     pt_pub_server -> tmr_control: 生成控制目标
     pt_pub_server -> planner: action.publish_feedback, \n告知轨迹跟踪的进度与误差
-    pt_pub_server -> rviz: 绘制tf2/Odom，表示当前位置
+    pt_pub_server -> rviz: 发送tf2和Odom，表示当前位置
 end
 
 pt_pub_server -> planner: action.set_succeeded, \n告知Traj飞行成功
