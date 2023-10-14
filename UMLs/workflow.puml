@@ -32,7 +32,7 @@ end note
 end note
 
 loop forever
-tmr_control -> quadrotor: pub角速度控制指令
+tmr_control -> quadrotor: AttitudeTarget, \n角速度控制指令
 end
 
 'note right of pt_publisher #aqua
