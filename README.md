@@ -1,14 +1,13 @@
 # CMD PC
 
-CMD PC is a repository for trajectory generation.
-
-[TOC]
+CMD PC is a repository for trajectory generation using minimum snap method.
 
 ## Installation
 
 1. Follow the installation in https://github.com/Li-Jinjie/ndp_nmpc_qd
-2. `git clone https://github.com/Li-Jinjie/cmd_pc.git`
-5. `catkin build` to build the whole workspace. Done!
+2. `pip install transitions`
+3. `git clone https://github.com/Li-Jinjie/cmd_pc.git`
+4. `catkin build` to build the whole workspace. Done!
 
 ## Getting Started
 
