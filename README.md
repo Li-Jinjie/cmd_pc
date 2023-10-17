@@ -16,6 +16,10 @@ Before each running:  `cd /path_to_workspace` and then `source devel/setup.bash`
 - If you want to make one quadrotor fly, just run `roslaunch ndp_nmpc_qd one_qd_nmpc.launch`
 - Then run `rosrun cmd_pc planner_node.py ` to send trajectories!
 
+## Workflow
+
+![](/home/lijinjie/ROS1/ndp_nmpc_ws/src/cmd_pc/UMLs/workflow.svg)
+
 ## License
 
 GPLv3. Please also open-source your project if you use the code from this repository. Let's make the whole community better!
