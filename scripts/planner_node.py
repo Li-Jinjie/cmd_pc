@@ -18,7 +18,7 @@ from transitions import Machine
 import actionlib
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Path
-from ndp_nmpc_qd.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
+from ndp_nmpc.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
 
 from traj_gen import TrajGenerator, MsgWaypoints
 from waypoints import eight_wpt_1, lab_area_wpts, eight_wpt_3, eight_wpt_1_diff_h
@@ -65,7 +65,7 @@ class PlannerNode(object):
         rospy.loginfo("Start planning trajectory......")
 
         # -------- path planner ----------
-        waypoints = eight_wpt_3  # change here!
+        waypoints = eight_wpt_1  # change here!
         self.viz_path(waypoints, self.path_pub)
         rospy.loginfo("Get path points!")
 

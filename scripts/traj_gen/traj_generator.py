@@ -13,7 +13,7 @@ import numpy as np
 
 from .polym_optimizer import PolymOptimizer, MinMethod
 from .inner_msgs import MsgWaypoints, MsgTrajCoeff
-from ndp_nmpc_qd.msg import TrajCoefficients, TrajPt
+from ndp_nmpc.msg import TrajCoefficients, TrajPt
 
 
 class TrajGenerator:
