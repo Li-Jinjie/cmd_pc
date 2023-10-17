@@ -18,7 +18,7 @@ Before each running:  `cd /path_to_workspace` and then `source devel/setup.bash`
 
 ## Workflow
 
-![](/home/lijinjie/ROS1/ndp_nmpc_ws/src/cmd_pc/UMLs/workflow.svg)
+![](./UMLs/workflow.svg)
 
 ## License
 
