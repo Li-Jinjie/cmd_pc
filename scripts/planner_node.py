@@ -21,8 +21,7 @@ from nav_msgs.msg import Path
 from ndp_nmpc.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackTrajFeedback
 
 from traj_gen import TrajGenerator, MsgWaypoints
-from waypoints import eight_wpt_1, lab_area_wpts, eight_wpt_3, eight_wpt_1_diff_h
-
+from load_path import ros_param_2_wpts, lab_area_wpts
 
 class PlannerNode(object):
     # Define some states. Most of the time, narcoleptic superheroes are just like
@@ -65,7 +64,7 @@ class PlannerNode(object):
         rospy.loginfo("Start planning trajectory......")
 
         # -------- path planner ----------
-        waypoints = eight_wpt_1  # change here!
+        waypoints = ros_param_2_wpts(rospy.get_name())
         self.viz_path(waypoints, self.path_pub)
         rospy.loginfo("Get path points!")
 

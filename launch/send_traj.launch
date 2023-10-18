@@ -1,0 +1,8 @@
+<launch>
+    <arg name="path_config_file" default="eight_low.yaml" />
+
+    <node pkg="cmd_pc" type="planner_node.py" name="planner" output="screen">
+        <rosparam command="load" file="$(find cmd_pc)/path_config/$(arg path_config_file)"/>
+    </node>
+
+</launch>

@@ -1,0 +1,29 @@
+define: &vel_mean 0.5  # m/s
+path:
+  - pos: [ 1.0, 1.0, 0.5 ] # m
+    yaw: 0.0 # deg
+    vel: *vel_mean # m/s
+  - pos: [ 3.0, 2.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ 5.0, 1.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ 3.0, 0.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ 1.0, 1.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ -1.0, 2.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ -3.0, 1.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ -1.0, 0.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
+  - pos: [ 1.0, 1.0, 0.5 ]
+    yaw: 0.0
+    vel: *vel_mean
