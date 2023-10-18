@@ -23,10 +23,12 @@ from ndp_nmpc.msg import TrackTrajAction, TrackTrajGoal, TrackTrajResult, TrackT
 from traj_gen import TrajGenerator, MsgWaypoints
 from load_path import ros_param_2_wpts, lab_area_wpts
 
+
 class PlannerNode(object):
     # Define some states. Most of the time, narcoleptic superheroes are just like
     # everyone else. Except for...
     states = ["GROUND", "TAKEOFF", "PLANNING", "EXECUTION", "LAND"]
+
     # states = ["asleep", "hanging out", "hungry", "sweaty", "saving the world"]
 
     def __init__(self):
@@ -35,12 +37,14 @@ class PlannerNode(object):
         # Trajectory generator
         self.traj_generator = TrajGenerator()
 
+        self.robot_name = rospy.get_param(rospy.get_name() + "/robot_name")
+
         # Action Client
         self.tracking_client = actionlib.SimpleActionClient(
-            "/fhnp/traj_tracker/pt_pub_action_server", TrackTrajAction  # TODO: change name
+            f"/{self.robot_name}/traj_tracker/pt_pub_action_server", TrackTrajAction
         )
         self.tracking_client.wait_for_server()
-        rospy.loginfo("Action Service exist: /fhnp/traj_tracker/pt_pub_action_server")
+        rospy.loginfo(f"Action Service exist: /{self.robot_name}/traj_tracker/pt_pub_action_server")
 
         # Finite State machine
         self.machine = Machine(model=self, states=PlannerNode.states, initial="PLANNING")

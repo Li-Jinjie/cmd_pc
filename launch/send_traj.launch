@@ -1,8 +1,10 @@
 <launch>
     <arg name="path_config_file" default="eight_low.yaml" />
+    <arg name="robot_name" default="fhnp" />
 
     <node pkg="cmd_pc" type="planner_node.py" name="planner" output="screen">
         <rosparam command="load" file="$(find cmd_pc)/path_config/$(arg path_config_file)"/>
+        <param name="robot_name" value="$(arg robot_name)"/>
     </node>
 
 </launch>
